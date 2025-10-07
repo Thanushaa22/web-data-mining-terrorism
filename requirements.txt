@@ -1,13 +1,10 @@
-feedparser
-beautifulsoup4
-scrapy
-tweepy
+streamlit
 pandas
-spacy
-pandas
+numpy
 matplotlib
 seaborn
 scikit-learn
 spacy
 vaderSentiment
-streamlit
+tweepy
+wordcloud
