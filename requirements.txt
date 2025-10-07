@@ -4,3 +4,10 @@ scrapy
 tweepy
 pandas
 spacy
+pandas
+matplotlib
+seaborn
+scikit-learn
+spacy
+vaderSentiment
+streamlit
