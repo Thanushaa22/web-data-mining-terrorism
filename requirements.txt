@@ -2,8 +2,17 @@ streamlit
 pandas
 numpy
 matplotlib
+<<<<<<< HEAD
 plotly
 vaderSentiment
 wordcloud
 tweepy
 scikit-learn
+=======
+seaborn
+scikit-learn
+spacy
+vaderSentiment
+tweepy
+wordcloud
+>>>>>>> d73521c562311b5feff7ffef3b2610df48c185d2
