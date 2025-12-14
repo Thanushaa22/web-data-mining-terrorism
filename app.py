@@ -1,5 +1,3 @@
-# app.py
-<<<<<<< HEAD
 """
 Web Data Mining - Tweet Analysis
 Single-file Streamlit app with multiple internal pages (Home, Dashboard, Live Tweets, Insights, About)
@@ -12,18 +10,11 @@ import numpy as np
 import os
 import re
 from datetime import datetime, timedelta
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from wordcloud import WordCloud
-=======
-import streamlit as st
-import pandas as pd
-import numpy as np
->>>>>>> d73521c562311b5feff7ffef3b2610df48c185d2
 import matplotlib.pyplot as plt
 import seaborn as sns
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from wordcloud import WordCloud
-import os
+
 
 # Try import Plotly(optional)
 try:
@@ -32,7 +23,6 @@ try:
 except Exception:
     PLOTLY = False
 
-<<<<<<< HEAD
 # ---------- Page config ----------
 st.set_page_config(page_title="Web Data Mining — Tweet Analysis", layout="wide", initial_sidebar_state="expanded")
 
@@ -449,7 +439,7 @@ st.markdown("""
 <hr style="border:1px solid rgba(255,255,255,0.06);">
 <p style="text-align:center; color:#bcd;"></p>
 """, unsafe_allow_html=True)
-=======
+
 # ---------- Helpers ----------
 @st.cache_data
 def load_csv_safe(path):
@@ -602,4 +592,3 @@ if use_live:
                     st.download_button("Download fetched tweets (CSV)", new_df.to_csv(index=False).encode('utf-8'), file_name="fetched_tweets.csv")
             except Exception as e:
                 st.error(f"Fetch failed: {e}")
->>>>>>> d73521c562311b5feff7ffef3b2610df48c185d2
