@@ -24,3 +24,4 @@ tfidf_df.to_csv(output_path, index=False, encoding="utf-8")
 
 print(f"✅ Extracted TF-IDF features: {tfidf_df.shape[0]} tweets × {tfidf_df.shape[1]-1} features")
 print(tfidf_df.head())
+

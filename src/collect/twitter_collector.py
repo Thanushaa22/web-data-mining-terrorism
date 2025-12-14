@@ -1,44 +1,56 @@
+# src/collect/twitter_collector.py
+import os
+import time
 import tweepy
 import pandas as pd
-import os
 from datetime import datetime
 
-# Ensure data folder exists
-os.makedirs("data", exist_ok=True)
+def get_twitter_client(bearer_token=None):
+    token = bearer_token or os.getenv("TWITTER_BEARER_TOKEN")
+    if not token:
+        raise ValueError("Twitter bearer token not provided. Set TWITTER_BEARER_TOKEN env or pass bearer_token.")
+    client = tweepy.Client(bearer_token=token, wait_on_rate_limit=False)
+    return client
 
-# 🔑 Replace with your own Bearer Token from Twitter Developer Portal
-BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAJ874gEAAAAA118IZbotZ5gCsUA2G9KIDKHqKqw%3DkZ1pSZxog2yXQQPr3Kw5JZvdiLAChPsgCgxAu4P549ZExOGS5c"
+def collect_tweets(query="terrorism OR extremist", max_results=50, bearer_token=None):
+    client = get_twitter_client(bearer_token=bearer_token)
+    q = f"{query} -is:retweet lang:en"
+    all_tweets = []
+    # max_results up to 100 per request; do small pages
+    remaining = max_results
+    next_token = None
+    backoff = 1
+    while remaining > 0:
+        count = min(100, remaining)
+        try:
+            resp = client.search_recent_tweets(query=q,
+                                              max_results=count,
+                                              next_token=next_token,
+                                              tweet_fields=["id","text","created_at","public_metrics","author_id"])
+        except tweepy.TooManyRequests:
+            # exponential backoff
+            time.sleep(backoff)
+            backoff = min(backoff * 2, 60)
+            continue
+        except Exception as e:
+            raise e
 
-# Initialize Tweepy client
-client = tweepy.Client(bearer_token=BEARER_TOKEN, wait_on_rate_limit=True)
-
-def collect_tweets(query="terrorism OR extremist", max_results=50):
-    """Collect tweets based on a search query"""
-    tweets = []
-    response = client.search_recent_tweets(
-        query=query + " lang:en -is:retweet",
-        tweet_fields=["id", "text", "author_id", "created_at", "public_metrics"],
-        max_results=max_results
-    )
-    if response.data:
-        for tweet in response.data:
-            tweets.append({
-                "id": tweet.id,
-                "author_id": tweet.author_id,
-                "created_at": tweet.created_at,
-                "text": tweet.text,
-                "retweets": tweet.public_metrics.get("retweet_count", 0),
-                "likes": tweet.public_metrics.get("like_count", 0),
-                "query": query,
+        if not resp or not resp.data:
+            break
+        for t in resp.data:
+            pm = t.public_metrics if hasattr(t, "public_metrics") else {}
+            all_tweets.append({
+                "id": t.id,
+                "author_id": getattr(t, "author_id", None),
+                "text": t.text,
+                "created_at": t.created_at,
+                "retweets": pm.get("retweet_count", 0),
+                "likes": pm.get("like_count", 0),
                 "collected_at": datetime.utcnow().isoformat()
             })
-    return pd.DataFrame(tweets)
-
-if __name__ == "__main__":
-    df = collect_tweets()
-    if not df.empty:
-        df.to_csv("data/twitter_tweets.csv", index=False, encoding="utf-8")
-        print(f"✅ Collected {len(df)} tweets → saved to data/twitter_tweets.csv")
-        print(df.head())
-    else:
-        print("⚠️ No tweets collected. Check your query or API access.")
+        remaining -= len(resp.data)
+        # pagination token
+        next_token = getattr(resp.meta, "next_token", None) or resp.meta.get("next_token") if resp.meta else None
+        if not next_token:
+            break
+    return pd.DataFrame(all_tweets)

@@ -1,0 +1,2 @@
+cd C:\Users\Hp\web-data-mining-terrorism
+streamlit run app.py
