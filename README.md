@@ -1,62 +1,95 @@
-🛰 Web Data Mining: Terrorism Tweet Analysis
+🛰 Web Data Mining – Terrorism Tweet Analysis
 
-A Streamlit-based Web Data Mining project that analyzes terrorism-related tweets using Natural Language Processing (NLP), Sentiment Analysis, Clustering, and Interactive Visualization
+A Streamlit-based web application that analyzes terrorism-related tweets using web data mining and NLP techniques.
+The project focuses on tweet preprocessing, sentiment analysis, clustering, and visual insights to understand online discussions around extremism.
 
-🚀 Project Overview
+📌 Project Objective
 
-This project focuses on mining and analyzing Twitter data related to terrorism and extremism to extract meaningful insights such as:
+To demonstrate how web mining and data analytics can be used to:
 
-Public sentiment trends
+-Analyze social media data related to terrorism
+-Identify sentiment patterns and clusters
+-Provide meaningful visual insights for decision-making
 
-Topic/cluster distribution
+(This project is built as part of an MCA academic project with a strong focus on real-world relevance)
 
-Keyword patterns
+🚀 Features
 
-Temporal tweet behavior
+📊 Dashboard Analytics
+1.Tweet count, sentiment distribution
+2.Cluster-wise analysis
+3.Date-wise trends
 
-It combines data preprocessing, sentiment analysis, clustering, and visualization into a single interactive web application.
+🧠 Text Processing
+1.Tweet cleaning (URLs, mentions, hashtags removal)
+2.Token normalization
+3.Keyword extraction
 
-✨ Key Features
-📊 Dashboard
+😊 Sentiment Analysis
+1.Positive / Neutral / Negative classification
+2.Implemented using VADER Sentiment Analyzer
 
-Cluster-wise tweet analysis
+☁ WordCloud Visualization
+1.Displays dominant keywords from filtered tweets
 
-Sentiment distribution (Positive / Neutral / Negative)
+⚡ Live Tweet Fetch (API-based)
+1.Uses Twitter API (Bearer Token required)
+2.Limited in deployment due to API rate restrictions
 
-Time-based tweet trends
+📥 CSV Export
+1.Download filtered and processed tweet data
 
-WordCloud generation
+🛠 Technologies Used
 
-CSV download for filtered data
+-Python
+-Streamlit – Web UI
+-Pandas & NumPy – Data processing
+-Matplotlib / Seaborn / Plotly – Visualization
+-VADER Sentiment Analyzer – NLP sentiment analysis
+-Twitter API (Tweepy) – Live data collection
 
-🔍 Insights Page
+📂 Project Structure
+web-data-mining-terrorism/
+│
+├── app.py                     # Main Streamlit application
+├── data/
+│   ├── twitter_tweets_clean.csv
+│   ├── twitter_clusters.csv
+│   ├── twitter_sentiment.csv
+│
+├── src/
+│   └── collect/
+│       └── twitter_collector.py
+│
+├── requirements.txt
+└── README.md
 
-Overall sentiment percentages
+▶ How to Run Locally
 
-Top keywords across all tweets
+1.Clone the repository
+git clone https://github.com/Thanushaa22/web-data-mining-terrorism.git
+cd web-data-mining-terrorism
 
-Cluster-specific keyword analysis
+2.Create virtual environment
+python -m venv venv
+venv\Scripts\activate   # Windows
 
-⚡ Live Tweets (API-based)
+3.Install dependencies
+pip install -r requirements.txt
 
-Fetches real-time tweets using Twitter API (Tweepy)
+4.Run the app
+streamlit run app.py
 
-Sentiment analysis applied instantly
+🔐 Twitter API Configuration (Optional)
+To enable live tweet fetching:
+-Create a Twitter Developer account
+-Generate a Bearer Token
+-Add it to Streamlit secrets:
+(.streamlit/secrets.toml)
+TWITTER_BEARER_TOKEN = "your_token_here"
+⚠️ Note: Live API may be limited on deployment due to rate limits.
 
-CSV download for fetched tweets
-
-⚠️ Note: Live Tweet fetching works locally but may be rate-limited or disabled in cloud deployment due to Twitter API restrictions.
-
-🛠 Tech Stack
-
-Frontend / UI: Streamlit
-
-Backend: Python
-
-NLP: Regex, Tokenization, VADER Sentiment Analysis
-
-Visualization: Plotly, Matplotlib, Seaborn, WordCloud
-
-Data Handling: Pandas, NumPy
-
-API: Twitter API (Tweepy)
+🌐 Deployment
+-Deployed using Streamlit Cloud
+-Static analysis features work reliably
+-Live tweet fetching may not work consistently due to API restrictions
