@@ -92,3 +92,7 @@ TWITTER_BEARER_TOKEN = "your_token_here"
 -Static analysis features work reliably
 -Live tweet fetching may not work consistently due to API restrictions
 
+Demo link:
+https://web-data-mining-terrorism-k3ytqpgwpj3oshvtrvan4s.streamlit.app/
+
+
