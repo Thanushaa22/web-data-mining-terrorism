@@ -11,8 +11,6 @@ To demonstrate how web mining and data analytics can be used to:
 -Identify sentiment patterns and clusters
 -Provide meaningful visual insights for decision-making
 
-(This project is built as part of an MCA academic project with a strong focus on real-world relevance)
-
 🚀 Features
 
 📊 Dashboard Analytics
@@ -93,3 +91,4 @@ TWITTER_BEARER_TOKEN = "your_token_here"
 -Deployed using Streamlit Cloud
 -Static analysis features work reliably
 -Live tweet fetching may not work consistently due to API restrictions
+
