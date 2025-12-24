@@ -96,7 +96,6 @@ TWITTER_BEARER_TOKEN = "your_token_here"
 Demo link:
 https://web-data-mining-terrorism-k3ytqpgwpj3oshvtrvan4s.streamlit.app/
 ---
-Testing Pull Shark achievement
 
 
 
