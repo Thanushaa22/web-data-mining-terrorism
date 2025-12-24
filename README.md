@@ -46,22 +46,6 @@ To demonstrate how web mining and data analytics can be used to:
 -VADER Sentiment Analyzer – NLP sentiment analysis
 -Twitter API (Tweepy) – Live data collection
 
-📂 Project Structure
-web-data-mining-terrorism/
-│
-├── app.py                     # Main Streamlit application
-├── data/
-│   ├── twitter_tweets_clean.csv
-│   ├── twitter_clusters.csv
-│   ├── twitter_sentiment.csv
-│
-├── src/
-│   └── collect/
-│       └── twitter_collector.py
-│
-├── requirements.txt
-└── README.md
-
 ▶ How to Run Locally
 
 1.Clone the repository
@@ -78,7 +62,7 @@ pip install -r requirements.txt
 4.Run the app
 streamlit run app.py
 
-🔐 Twitter API Configuration (Optional)
+🔐 Twitter API Configuration 
 To enable live tweet fetching:
 -Create a Twitter Developer account
 -Generate a Bearer Token
@@ -96,6 +80,7 @@ TWITTER_BEARER_TOKEN = "your_token_here"
 Demo link:
 https://web-data-mining-terrorism-k3ytqpgwpj3oshvtrvan4s.streamlit.app/
 ---
+
 
 
 
